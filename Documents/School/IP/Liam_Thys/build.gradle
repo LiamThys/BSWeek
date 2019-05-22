@@ -1,0 +1,52 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'gerechten'
+    version =  '0.1.0'
+}
+repositories {
+    mavenCentral()
+}
+
+version = '1.0.0-SNAPSHOT'
+sourceCompatibility = 1.8 
+targetCompatibility = 1.8
+
+ext{
+    jstlVersion = '1.2'
+    tomcatEmbedJasperVersion = '9.0.10'
+    ecjVersion = '4.4.2'
+}
+
+dependencies {
+    
+    compile("org.springframework.boot:spring-boot-starter-web")
+    
+    compile group: 'javax.servlet', name: 'jstl', version: jstlVersion 
+    
+    compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: tomcatEmbedJasperVersion
+    
+    compile group: 'org.eclipse.jdt.core.compiler', name: 'ecj', version: ecjVersion
+    
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile('mysql:mysql-connector-java:8.0.13')
+    
+    compile("com.h2database:h2")
+    
+    
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
